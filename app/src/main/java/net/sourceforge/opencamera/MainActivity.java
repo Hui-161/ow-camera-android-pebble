@@ -2812,10 +2812,31 @@ public class MainActivity extends AppCompatActivity implements PreferenceFragmen
         pebbleWatchButton.setEnabled(true);
     }
 
-    public void pebbleOnPictureTaken() {
+    public void pebbleOnPictureTaken(boolean saved) {
         this.pebble_picture_state = MainActivity.pebble_picture_ready;
 
         pebble.onPictureTaken(this);
+
+        // Photos taken from the watch otherwise give no hint on the phone where they went, and
+        // the default folder (DCIM/OpenCamera) isn't where the system camera saves.
+        String folder = saved ? getSaveFolderForDisplay() : null;
+        if( folder != null ) {
+            preview.showToast(pebble_saved_toast, getResources().getString(R.string.pebble_photo_saved, folder), true);
+        }
+    }
+
+    private final ToastBoxer pebble_saved_toast = new ToastBoxer();
+
+    /** Returns the photo save folder in a form to show the user, or null if there isn't one
+     *  (a Storage Access Framework folder without a file path).
+     */
+    private String getSaveFolderForDisplay() {
+        StorageUtils storageUtils = applicationInterface.getStorageUtils();
+        if( storageUtils.isUsingSAF() ) {
+            return storageUtils.getImageFolderPath();
+        }
+        String folder = storageUtils.getSaveLocation();
+        return StorageUtils.saveFolderIsFull(folder) ? folder : storageUtils.getSaveRelativeFolder();
     }
     // Pebble Changes End
 

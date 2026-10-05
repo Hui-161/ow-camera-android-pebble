@@ -1102,5 +1102,6 @@
 
     <!-- Pebble Changes Start -->
     <string name="preference_back_to_camera">Back to camera</string>
+    <string name="pebble_photo_saved">Photo saved to %s</string>
     <!-- Pebble Changes End -->
 </resources>
