@@ -64,6 +64,84 @@
 
     <!-- </PreferenceCategory> -->
 
+    <!-- Pebble Changes Start: settings that matter when the watch takes the photo, moved here
+         from the sub-screens (keys unchanged, so stored values carry over). None of them is
+         looked up with findPreference() in its old sub-screen class. -->
+    <PreferenceCategory
+        android:key="preference_category_pebble"
+        android:title="@string/preference_category_pebble">
+
+        <Preference
+            android:key="preference_pebble_info"
+            android:title="@string/preference_pebble_info"
+            android:summary="@string/preference_pebble_info_summary"
+            android:persistent="false"
+            android:selectable="false"
+            />
+
+        <SwitchPreference
+            android:key="preference_keep_display_on"
+            android:title="@string/preference_keep_display_on"
+            android:summary="@string/preference_keep_display_on_summary"
+            android:defaultValue="true"
+            />
+
+        <SwitchPreference
+            android:key="preference_show_when_locked"
+            android:title="@string/preference_show_when_locked"
+            android:summary="@string/preference_show_when_locked_summary"
+            android:defaultValue="false"
+            />
+
+        <SwitchPreference
+            android:key="preference_pause_preview"
+            android:title="@string/preference_pause_preview"
+            android:summary="@string/preference_pause_preview_summary"
+            android:defaultValue="false"
+            />
+
+        <SwitchPreference
+            android:key="preference_timer_beep"
+            android:title="@string/preference_timer_beep"
+            android:summary="@string/preference_timer_beep_summary"
+            android:defaultValue="true"
+            />
+
+        <SwitchPreference
+            android:key="preference_timer_speak"
+            android:title="@string/preference_timer_speak"
+            android:summary="@string/preference_timer_speak_summary"
+            android:defaultValue="false"
+            />
+
+    </PreferenceCategory>
+    <!-- Pebble Changes End -->
+
+    <!-- Pebble Changes: moved above the camera controls and retitled; video went to
+         PreferenceSubAdvanced, and the more camera controls (which hold the save location) came here -->
+    <PreferenceCategory
+        android:key="preference_category_camera_quality"
+        android:title="@string/preference_category_photos">
+
+        <PreferenceScreen
+            android:key="preference_screen_photo_settings"
+            android:title="@string/preference_screen_photo_settings"
+            android:icon="@drawable/take_photo_pref"
+            android:persistent="false"
+            android:fragment="net.sourceforge.opencamera.PreferenceSubPhoto"
+            />
+
+        <PreferenceScreen
+            android:key="preference_screen_camera_controls_more"
+            android:title="@string/preference_screen_camera_controls_more"
+            android:summary="@string/preference_screen_camera_controls_more_summary"
+            android:icon="@drawable/ic_more_horiz_white_48dp"
+            android:persistent="false"
+            android:fragment="net.sourceforge.opencamera.PreferenceSubCameraControlsMore"
+            />
+
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:key="preference_category_camera_controls"
         android:title="@string/preference_category_camera_controls">
@@ -104,67 +182,17 @@
             android:defaultValue="0"
             />
 
+        <!-- Pebble Changes Start: preview, GUI, video, location and processing moved into
+             PreferenceSubAdvanced to keep this screen short -->
         <PreferenceScreen
-            android:key="preference_screen_camera_controls_more"
-            android:title="@string/preference_screen_camera_controls_more"
+            android:key="preference_screen_advanced"
+            android:title="@string/preference_screen_advanced"
+            android:summary="@string/preference_screen_advanced_summary"
             android:icon="@drawable/ic_more_horiz_white_48dp"
             android:persistent="false"
-            android:fragment="net.sourceforge.opencamera.PreferenceSubCameraControlsMore"
+            android:fragment="net.sourceforge.opencamera.PreferenceSubAdvanced"
             />
-
-        <PreferenceScreen
-            android:key="preference_preview"
-            android:title="@string/preference_preview"
-            android:icon="@drawable/ic_more_horiz_white_48dp"
-            android:persistent="false"
-            android:fragment="net.sourceforge.opencamera.PreferenceSubPreview"
-            />
-
-        <PreferenceScreen
-            android:key="preference_screen_gui"
-            android:title="@string/preference_screen_gui"
-            android:icon="@drawable/ic_more_horiz_white_48dp"
-            android:persistent="false"
-            android:fragment="net.sourceforge.opencamera.PreferenceSubGUI"
-            />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="preference_category_camera_quality"
-        android:title="@string/preference_category_camera_quality">
-
-        <PreferenceScreen
-            android:key="preference_screen_photo_settings"
-            android:title="@string/preference_screen_photo_settings"
-            android:icon="@drawable/take_photo_pref"
-            android:persistent="false"
-            android:fragment="net.sourceforge.opencamera.PreferenceSubPhoto"
-            />
-    
-        <PreferenceScreen
-            android:key="preference_screen_video_settings"
-            android:title="@string/preference_screen_video_settings"
-            android:icon="@drawable/take_video_pref"
-            android:persistent="false"
-            android:fragment="net.sourceforge.opencamera.PreferenceSubVideo"
-            />
-
-        <PreferenceScreen
-            android:key="preference_screen_location_settings"
-            android:title="@string/preference_screen_location_settings"
-            android:icon="@drawable/ic_gps_fixed_white_48dp"
-            android:persistent="false"
-            android:fragment="net.sourceforge.opencamera.PreferenceSubLocation"
-            />
-
-        <PreferenceScreen
-            android:key="preference_screen_processing_settings"
-            android:title="@string/preference_screen_processing_settings"
-            android:icon="@drawable/ic_more_horiz_white_48dp"
-            android:persistent="false"
-            android:fragment="net.sourceforge.opencamera.PreferenceSubProcessing"
-            />
+        <!-- Pebble Changes End -->
 
     </PreferenceCategory>
 

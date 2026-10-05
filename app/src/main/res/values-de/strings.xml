@@ -962,6 +962,13 @@
 
     <!-- Pebble Changes Start -->
     <string name="preference_back_to_camera">Zurück zur Kamera</string>
+    <string name="preference_category_pebble">Pebble-Uhr</string>
+    <string name="preference_pebble_info">Diese App geöffnet lassen</string>
+    <string name="preference_pebble_info_summary">Die Uhr kann nur auslösen und die Vorschau zeigen, solange diese App auf dem Telefon geöffnet und der Bildschirm an ist. Fotos landen im Speicherort unter „Mehr Kamera-Einstellungen“ (ohne Änderung DCIM/OpenCamera).</string>
+    <string name="preference_category_photos">Fotos und Speicherort</string>
+    <string name="preference_screen_camera_controls_more_summary">Speicherort, Dateinamen, Auslösegeräusch, Lautstärketasten u. a.</string>
+    <string name="preference_screen_advanced">Erweitert…</string>
+    <string name="preference_screen_advanced_summary">Kamera-Vorschau, Benutzeroberfläche, Video, Standort und Verarbeitung</string>
     <string name="pebble_photo_saved">Foto gespeichert in %s</string>
     <!-- Pebble Changes End -->
 </resources>

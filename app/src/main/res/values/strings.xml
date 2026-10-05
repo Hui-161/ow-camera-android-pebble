@@ -1102,6 +1102,13 @@
 
     <!-- Pebble Changes Start -->
     <string name="preference_back_to_camera">Back to camera</string>
+    <string name="preference_category_pebble">Pebble watch</string>
+    <string name="preference_pebble_info">Keep this app open</string>
+    <string name="preference_pebble_info_summary">The watch can only take photos and show the preview while this app is open on the phone with the screen on. Photos go to the save location under More camera controls (DCIM/OpenCamera unless changed).</string>
+    <string name="preference_category_photos">Photos and save location</string>
+    <string name="preference_screen_camera_controls_more_summary">Save location, file names, shutter sound, volume keys and more</string>
+    <string name="preference_screen_advanced">Advanced…</string>
+    <string name="preference_screen_advanced_summary">Camera preview, on screen GUI, video, location and processing</string>
     <string name="pebble_photo_saved">Photo saved to %s</string>
     <!-- Pebble Changes End -->
 </resources>

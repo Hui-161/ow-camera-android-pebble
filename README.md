@@ -11,6 +11,14 @@ There are three branches I am maintaining:
 - [development](https://github.com/jamsinclair/ow-camera-android/tree/development): Adds support for Pebble remote shutter control without modifying the original namespace.
 - [release](https://github.com/jamsinclair/ow-camera-android/tree/release): Renames the namespace to `com.github.jamsinclair.owcamera2` and should be used for any builds intended for release.
 
+## Changes in this fork
+
+On top of upstream `development`:
+
+- **Back from the settings works on Android 16.** The app targets API 36, where predictive back no longer calls `onBackPressed()`; back from a settings screen used to send the whole app to the background. Every settings screen also starts with a "Back to camera" entry.
+- **Shorter settings.** The main screen starts with a "Pebble watch" section holding the options that matter when the watch takes the photo (keep display on, show when locked, pause after photo, timer beep and voice). Camera preview, on-screen GUI, video, location and processing moved into "Advanced…". Preference keys are unchanged, so existing settings carry over.
+- **Save location toast.** After a photo taken from the watch the app shows where it was saved (by default `DCIM/OpenCamera`, not the system camera's `DCIM/Camera`).
+
 ## Installation
 
 [<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80">](https://github.com/jamsinclair/ow-camera-android/releases/latest)

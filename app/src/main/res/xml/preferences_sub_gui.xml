@@ -144,12 +144,7 @@
         android:defaultValue="true"
         />
 
-    <SwitchPreference
-        android:key="preference_keep_display_on"
-        android:title="@string/preference_keep_display_on"
-        android:summary="@string/preference_keep_display_on_summary"
-        android:defaultValue="true"
-        />
+    <!-- Pebble Changes: preference_keep_display_on moved to preferences.xml (category preference_category_pebble) -->
 
     <SwitchPreference
         android:key="preference_max_brightness"

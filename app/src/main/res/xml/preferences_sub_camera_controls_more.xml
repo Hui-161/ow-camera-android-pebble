@@ -12,12 +12,7 @@
         android:defaultValue="none"
         />
 
-    <SwitchPreference
-        android:key="preference_pause_preview"
-        android:title="@string/preference_pause_preview"
-        android:summary="@string/preference_pause_preview_summary"
-        android:defaultValue="false"
-        />
+    <!-- Pebble Changes: preference_pause_preview moved to preferences.xml (category preference_category_pebble) -->
 
     <!--  if we move this to another PreferenceGroup, we should update code to remove this Preference -->
     <SwitchPreference
@@ -27,19 +22,9 @@
         android:defaultValue="true"
         />
 
-    <SwitchPreference
-        android:key="preference_timer_beep"
-        android:title="@string/preference_timer_beep"
-        android:summary="@string/preference_timer_beep_summary"
-        android:defaultValue="true"
-        />
+    <!-- Pebble Changes: preference_timer_beep moved to preferences.xml (category preference_category_pebble) -->
 
-    <SwitchPreference
-        android:key="preference_timer_speak"
-        android:title="@string/preference_timer_speak"
-        android:summary="@string/preference_timer_speak_summary"
-        android:defaultValue="false"
-        />
+    <!-- Pebble Changes: preference_timer_speak moved to preferences.xml (category preference_category_pebble) -->
 
     <ListPreference
         android:key="preference_volume_keys"
@@ -151,12 +136,7 @@
         android:defaultValue="true"
         />
 
-    <SwitchPreference
-        android:key="preference_show_when_locked"
-        android:title="@string/preference_show_when_locked"
-        android:summary="@string/preference_show_when_locked_summary"
-        android:defaultValue="false"
-        />
+    <!-- Pebble Changes: preference_show_when_locked moved to preferences.xml (category preference_category_pebble) -->
 
     <SwitchPreference
         android:key="preference_startup_focus"
