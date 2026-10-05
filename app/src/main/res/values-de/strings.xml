@@ -960,4 +960,7 @@
     <string name="preference_audio_control_noise">Lautes Geräusch</string>
     <string name="preference_audio_control_voice">Sprachkommando: \"cheese\"</string> <!-- note that cheese shouldn't be translated, as we listen for this no matter what language is being used -->
 
+    <!-- Pebble Changes Start -->
+    <string name="preference_back_to_camera">Zurück zur Kamera</string>
+    <!-- Pebble Changes End -->
 </resources>

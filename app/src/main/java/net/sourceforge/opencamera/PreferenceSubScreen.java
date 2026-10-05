@@ -38,6 +38,11 @@ public class PreferenceSubScreen extends PreferenceFragment implements SharedPre
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Pebble Changes Start
+        // here rather than in onCreate(), as subclasses only add their preferences after calling super.onCreate()
+        MyPreferenceFragment.addBackToCameraPreference(this);
+        // Pebble Changes End
+
         if( edge_to_edge_mode ) {
             MyPreferenceFragment.handleEdgeToEdge(view);
         }

@@ -773,6 +773,13 @@ public class MainActivity extends AppCompatActivity implements PreferenceFragmen
         this.getOnBackPressedDispatcher().addCallback(this, pausePreviewOnBackPressedCallback);
         screenLockOnBackPressedCallback = new ScreenLockOnBackPressedCallback(false);
         this.getOnBackPressedDispatcher().addCallback(this, screenLockOnBackPressedCallback);
+        // Pebble Changes Start
+        settingsOnBackPressedCallback = new SettingsOnBackPressedCallback(false);
+        this.getOnBackPressedDispatcher().addCallback(this, settingsOnBackPressedCallback);
+        getFragmentManager().addOnBackStackChangedListener(this::updateSettingsOnBackPressedCallback);
+        // the settings may already be open if the activity was recreated
+        updateSettingsOnBackPressedCallback();
+        // Pebble Changes End
 
         // create notification channel - only needed on Android 8+
         // update: notifications now removed due to needing permissions on Android 13+
@@ -4101,6 +4108,59 @@ public class MainActivity extends AppCompatActivity implements PreferenceFragmen
             screenLockOnBackPressedCallback.setEnabled(enabled);
         }
     }
+
+    // Pebble Changes Start
+    private SettingsOnBackPressedCallback settingsOnBackPressedCallback;
+
+    /** Closes the topmost settings screen on back.
+     *  Open Camera relies on Activity.onBackPressed() to pop the settings screens off the
+     *  (framework) fragment back stack. Targeting Android 16 (API 36) enables predictive back,
+     *  where onBackPressed() is no longer called: without an enabled callback the system
+     *  default moves the whole task to the background, so back from any settings screen left
+     *  the app instead of returning to the camera.
+     */
+    private class SettingsOnBackPressedCallback extends OnBackPressedCallback {
+        public SettingsOnBackPressedCallback(boolean enabled) {
+            super(enabled);
+        }
+
+        @Override
+        public void handleOnBackPressed() {
+            if( MyDebug.LOG )
+                Log.d(TAG, "SettingsOnBackPressedCallback.handleOnBackPressed");
+            try {
+                // removing the last MyPreferenceFragment calls settingsClosing(), see MyPreferenceFragment.onDestroy()
+                getFragmentManager().popBackStack();
+            }
+            catch(IllegalStateException e) {
+                // state already saved - same case Activity.onBackPressed() skips
+                Log.e(TAG, "can't close settings screen", e);
+            }
+        }
+    }
+
+    private void updateSettingsOnBackPressedCallback() {
+        if( settingsOnBackPressedCallback != null ) {
+            settingsOnBackPressedCallback.setEnabled(getFragmentManager().getBackStackEntryCount() > 0);
+        }
+    }
+
+    /** Closes all settings screens at once and returns to the camera.
+     */
+    public void closeSettingsToCamera() {
+        if( MyDebug.LOG )
+            Log.d(TAG, "closeSettingsToCamera");
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+        if( fragmentManager.getBackStackEntryCount() == 0 )
+            return;
+        try {
+            fragmentManager.popBackStack(fragmentManager.getBackStackEntryAt(0).getId(), android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+        catch(IllegalStateException e) {
+            Log.e(TAG, "can't close settings", e);
+        }
+    }
+    // Pebble Changes End
 
     // should no longer use onBackPressed() - instead use OnBackPressedCallback, for upcoming changes in Android 14+ (predictive back gestures)
     /*@Override

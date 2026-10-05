@@ -94,6 +94,9 @@ public class MyPreferenceFragment extends PreferenceFragment implements OnShared
             Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+        // Pebble Changes Start
+        addBackToCameraPreference(this);
+        // Pebble Changes End
 
         final Bundle bundle = getArguments();
         this.edge_to_edge_mode = bundle.getBoolean("edge_to_edge_mode");
@@ -953,6 +956,36 @@ public class MyPreferenceFragment extends PreferenceFragment implements OnShared
 
         dismissDialogs(getFragmentManager(), dialogs);
     }
+
+    // Pebble Changes Start
+    private static final String BACK_TO_CAMERA_KEY = "preference_back_to_camera";
+
+    /** Adds a "Back to camera" entry at the top of a settings screen.
+     *  The settings have no toolbar, so the only way out used to be the system back gesture,
+     *  one screen at a time - and that is easy to miss in a nested sub-screen.
+     */
+    static void addBackToCameraPreference(PreferenceFragment fragment) {
+        if( fragment.findPreference(BACK_TO_CAMERA_KEY) != null ) {
+            // view recreated for the same fragment
+            return;
+        }
+        Preference pref = new Preference(fragment.getActivity());
+        pref.setKey(BACK_TO_CAMERA_KEY);
+        pref.setTitle(R.string.preference_back_to_camera);
+        pref.setIcon(R.drawable.baseline_close_white_48);
+        pref.setPersistent(false);
+        // before everything inflated from XML, which is numbered from 0
+        pref.setOrder(-1);
+        pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                ((MainActivity)fragment.getActivity()).closeSettingsToCamera();
+                return true;
+            }
+        });
+        fragment.getPreferenceScreen().addPreference(pref);
+    }
+    // Pebble Changes End
 
     static void dismissDialogs(FragmentManager fragment_manager, HashSet<AlertDialog> dialogs) {
         // dismiss open dialogs - see comment for dialogs for why we do this
